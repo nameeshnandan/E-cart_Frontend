@@ -1,0 +1,17 @@
+.first{
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+.first img{
+    margin-top: -8px;
+    
+}
+.head{
+    font-size: 45px;
+    font-family: 'Marcellus', serif;
+    font-weight: 600;
+    padding: 10px;
+    
+    /* margin-top: 10px; */
+}

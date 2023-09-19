@@ -1,0 +1,52 @@
+
+
+            E COMMERCE FRONTEND CREATION
+    ____________________________________________
+
+
+1. Create a folder E-cart , inside it create frontend and backend
+2. Project Creation : ng new e-cart-frontend
+3. Run the frontend : ng s-o
+4. Clean the code in app.component.html
+5. Install 3rd party libraries
+    ->Copy paste bootstrap, fontawsome, googlefonts
+6. Creating components
+    ->
+7. Lazy Loading     (Lazy loading helps keep initial bundle sizes smaller, which in turn helps decrease load times.)
+            -> Module Generation - ng g m products --route products --module app.module
+
+        Components craete inside the products module
+            -> ng g c products/allProducts
+            -> ng g c products/viewProduct
+            -> ng g c products/cart
+            -> ng g c products/wishlist
+
+        Not included in the products module
+            -> ng g c header
+            -> ng g c footer 
+            -> ng g c pageNotFound
+
+8. Path setting
+    http://localhost:4200/ => http://localhost:4200/products/allProducts
+    const routes: Routes = [{ path: '', component: AllProductsComponent }];
+
+9. Backend Creation
+
+10. API Integration
+
+    -> Create api function in api.service
+    -> call thet ffunction in corresponding component
+    -> Display the details of the product
+    -> Wishlist Integration
+
+    ng g p productss/pipes/filter
+
+11. Behavior Subject
+    -> It is used to share strem of data from on component to another
+    -> Its under the rxjs library
+    -> Its a synchronus function
+    -> next() metheod is used to attach the data
+
+
+
+

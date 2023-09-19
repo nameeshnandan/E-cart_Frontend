@@ -1,0 +1,185 @@
+<div class="first">
+
+    <h2 class="head mt-3  text-dark text-center">My cart <span><img class="ms-1" width="35px" src="https://cdn.onlinewebfonts.com/svg/img_225646.png" alt=""></span></h2>
+</div>
+
+
+<!-- Empty cart  -->
+
+<div class="container" *ngIf="product.length==0" >
+    <div class="row">
+        <div class="col text-center mt-1">
+            <img width="500px" src="https://www.tokoterserah.com/images/empty-cart.gif" alt="">
+            <h3>Your cart is empty</h3>
+            <p>Explore site add items to your cart</p>
+            <button routerLink="" class="btn btn-dark mb-5">Shop more</button>
+        </div>
+    </div>
+</div>
+
+<!-- Cart with content -->
+
+<div class="container" *ngIf="product.length>=1">
+    <div class="row">
+        <div class="col-8">
+            <!-- Table  -->
+            <table class=" w-100" >
+                <thead>
+                    <tr>
+                        <th class="border p-2">Name</th>
+                        <th class="border p-2">No</th>
+                        <th class="border p-2">Image</th>
+                        <th class="border p-2">Quantity</th>
+                        <th class="border p-2">Price</th>
+                        <th class="border p-2">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of  product;let i=index">
+                        <td class="border p-2">{{i+1}}</td>
+                        <td class="border p-2">{{item.title}}</td>
+                        <td class="border p-2"><img width="100px" height="100px"[src]="item.image" alt=""></td>
+                        <td class="border ">
+                            <div class="d-flex">
+                                <button (click)="decrementCart(item.id)" class="btn">-</button>
+                                <input type="text" value={{item.quantity}} class="form-control w-25">
+                                <button (click)="incrementCart(item.id)" class="btn">+</button>
+                            </div>
+                        </td>
+                        <td class="border p-0">$ {{item.price}}</td>
+                        <td class="border p-2">
+                            <i class="fa fa-trash" (click)="deletecart(item.id)"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="col-4 card p-5">
+            <!-- Summary  -->
+            <h3>Price : $ {{totalprice}}</h3>
+            <h1>Total : $ {{totalprice}}</h1>
+            <div class=" text-center">
+                <button class="btn btn-success btn-lg mt-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Check Out</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Check out details</h1>
+          <button (click)="modalClose()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <!-- form  -->
+          <form [formGroup]="checkform" (ngSubmit)="check()" *ngIf="!paymentstatus">
+            <h3>Enter your delivery details</h3>
+            <!-- Name -->
+              <div class="form-floating mb-3">
+                <input name="name" formControlName="name" type="text" class="form-control"  placeholder="enter your name">
+                <label for="floatingInput">Enter your name </label>
+                <div class="text-danger ms-3" *ngIf="this.checkform.get('name')?.errors && this.checkform.get('name')?.touched" style="height: 20px;">Invalid name</div>
+              </div>
+
+            <!-- email  -->
+              <div class="form-floating mb-3">
+                <input name="email" formControlName="email" type="email" class="form-control"  placeholder="enter your email">
+                <label for="floatingInput">Email address</label>
+                <div class="text-danger ms-3" *ngIf="this.checkform.get('email')?.errors && this.checkform.get('email')?.touched" style="height: 20px;">Invalid email</div>
+              </div>
+
+            <!-- address  -->
+              <div class="form-floating mb-3">
+                <input name="address" formControlName="address" type="text" class="form-control"  placeholder="enter your name">
+                <label for="floatingInput">Address </label>
+                <div class="text-danger ms-3" *ngIf="this.checkform.get('address')?.errors && this.checkform.get('address')?.touched" style="height: 20px;">Invalid address</div>
+              </div>
+
+            <!-- house number  -->
+              <div class="form-floating mb-3">
+                <input name="houseNo" formControlName="houseNo" type="number" class="form-control"  placeholder="house number">
+                <label for="floatingInput">House Number </label>
+                <div class="text-danger ms-3" *ngIf="this.checkform.get('houseNo')?.errors && this.checkform.get('houseNo')?.touched" style="height: 20px;">Invalid house number</div>
+              </div>
+
+            <!-- land mark -->
+              <div class="form-floating mb-3">
+                <input name="landmark" formControlName="landmark" type="text" class="form-control"  placeholder="Landmark">
+                <label for="floatingInput">Landmark </label>
+                <div class="text-danger ms-3" *ngIf="this.checkform.get('landmark')?.errors && this.checkform.get('landmark')?.touched" style="height: 20px;">Invalid landmark</div>
+              </div>
+
+            <!-- State -->
+              <div class="form-floating mb-3">
+                <input name="state" formControlName="state" type="text" class="form-control"  placeholder="State">
+                <label for="floatingInput">State </label>
+                <div class="text-danger ms-3" *ngIf="this.checkform.get('state')?.errors && this.checkform.get('state')?.touched" style="height: 20px;">Invalid state </div>
+              </div>
+
+            <!-- number -->
+              <div class="form-floating mb-3">
+                <input name="phoneNo" formControlName="phoneNo" type="number" class="form-control"  placeholder="phone number">
+                <label for="floatingInput">Contact number </label>
+                <div class="text-danger ms-3" *ngIf="this.checkform.get('phoneNo')?.errors && this.checkform.get('phoneNo')?.touched" style="height: 20px;">Invalid phone number</div>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Proceed to pay</button>
+              </div>
+          </form>
+
+
+          <!-- address details  -->
+            <div *ngIf="paymentstatus">
+                <h5>Delivery details</h5>
+                <p>{{username}}</p>
+                <p>{{email}}</p>
+                <p>{{address}}</p>
+                <p>{{houseNo}}</p>
+                <p>{{landmark}}</p>
+                <p>{{state}}</p>
+                <p>{{phoneNo}}</p>
+            </div>
+
+            
+            <!-- total price and offers -->
+            <div>
+                <h3 class="text-danger">Total price : ${{totalprice}}</h3>
+                <h4 *ngIf="!discountclick" class="text-success">Offer price : <a (click)="offerClicked()" > <i class="fa-solid fa-tag fa-beat-fade"></i></a></h4>
+            </div>
+
+            <!-- discount -->
+            <div *ngIf="offerclicked">
+                <!-- 10% discount  -->
+                <img (click)="discount(10)" *ngIf="totalprice<500"  height="100px" class="ms-5" src="https://www.kindpng.com/picc/m/45-451334_10-percent-off-png-download-image-10-discount.png" alt="">
+                <!-- 50% discount  -->
+                <img (click)="discount(10)" *ngIf="totalprice>500" height="100px" class="ms-5" src="https://st.depositphotos.com/2036511/2769/v/450/depositphotos_27691643-stock-illustration-red-50-percent-discount-sign.jpg" alt="">
+            </div>
+
+            <!-- make payyment -->
+            <div *ngIf="discountclick " class="text-center">
+                <button (click)="paypalPay()" class="btn btn-success">Make payment</button>
+            </div>
+
+            <!-- paypal -->
+            <div *ngIf="shoePaypalStatus">
+
+              <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+            </div>
+
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  
+
+  

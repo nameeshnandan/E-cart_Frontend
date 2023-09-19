@@ -1,0 +1,25 @@
+
+
+a{
+    font-size: 40px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+nav{
+    height: 70px;
+}
+.search{
+    width: 40%;
+    margin-left: 150px;
+    margin-right: 200px;
+
+}
+input{
+    height: 35px;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding-left: 10px;
+}
+/* form{
+    margin-left: 580px;
+} */

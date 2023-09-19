@@ -1,0 +1,14 @@
+
+/* .card img{
+    transition: 1s;
+}
+.column:hover{
+    transform: scale(1.1);
+    transition: .5s;
+} */
+
+p{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif, sans-serif;
+    font-weight: 600;
+    font-size: 40px;
+}
